@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { operations, numRows, numCols } from "./Initialize";
 import produce from "immer";
+import "./GameOfLife.css";
 
 const generateEmptyGrid = () => {
   const rows = [];
@@ -54,12 +55,26 @@ function GameOfLife() {
   }, [time]);
 
   useEffect(() => {
-    setGeneration(generation + 1);
+    generation == 0 && running == false
+      ? setGeneration(0)
+      : setGeneration(generation + 1);
+    // setGeneration(generation + 1);
     // setTimeout(runSimulation, time);
   }, [grid]);
 
   return (
     <>
+      <h1>Conways Game of Life</h1>
+      <div className="rules">
+        <ol>
+          <li>Any live cell with two or three live neighbours survives.</li>
+          <li>Any dead cell with three live neighbours becomes a live cell.</li>
+          <li>
+            All other live cells die in the next generation. Similarly, all
+            other dead cells stay dead.
+          </li>
+        </ol>
+      </div>
       <button
         onClick={() => {
           setRunning(!running);
@@ -70,21 +85,6 @@ function GameOfLife() {
         }}
       >
         {running ? "Stop" : "Start"}
-      </button>
-      <button
-        onClick={() => {
-          const rows = [];
-          for (let i = 0; i < numRows; i++) {
-            rows.push(
-              Array.from(Array(numCols), () => (Math.random() > 0.7 ? 1 : 0))
-            );
-          }
-
-          setGrid(rows);
-          setGeneration(0);
-        }}
-      >
-        Random
       </button>
       <button
         onClick={() => {
@@ -107,6 +107,21 @@ function GameOfLife() {
         }}
       >
         Slower
+      </button>
+      <button
+        onClick={() => {
+          const rows = [];
+          for (let i = 0; i < numRows; i++) {
+            rows.push(
+              Array.from(Array(numCols), () => (Math.random() > 0.7 ? 1 : 0))
+            );
+          }
+
+          setGrid(rows);
+          setGeneration(0);
+        }}
+      >
+        Random
       </button>
       <button
         onClick={() => {
