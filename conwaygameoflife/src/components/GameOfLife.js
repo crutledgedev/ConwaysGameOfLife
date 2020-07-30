@@ -3,6 +3,9 @@ import { operations, numRows, numCols } from "./Initialize";
 import produce from "immer";
 import "./GameOfLife.css";
 
+///intial grid generation for out application this renders an emptyh grid where all values are 0
+//inital values are imported from Initialize.js to remove clutter from this component
+
 const generateEmptyGrid = () => {
   const rows = [];
   for (let i = 0; i < numRows; i++) {
@@ -12,14 +15,21 @@ const generateEmptyGrid = () => {
   return rows;
 };
 
+//lets create our application with a functional component
 function GameOfLife() {
+  //state management of our app useState values are self descriptive -
+
+  //grid
   const [grid, setGrid] = useState(() => {
     return generateEmptyGrid();
   });
+  // generation tracker
   const [generation, setGeneration] = useState(0);
+  //running tracker
   const [running, setRunning] = useState(false);
+  //time interval between generations
   const [time, setTime] = useState(1000);
-
+  //useRef and useCallback hooks utilized to simplify implementation
   const runningRef = useRef(running);
   runningRef.current = running;
 
@@ -28,21 +38,26 @@ function GameOfLife() {
       return;
     }
 
+    //gridCopy fullfilles the double buffering requirement - allowing the next generation to be calculated without disturbing the
+    // the state currently being rendered to the screen.
     setGrid((g) => {
       return produce(g, (gridCopy) => {
+        //iterates thorugh grid checks to see if the surrounding cells are "dead" or "alive"
         for (let i = 0; i < numRows; i++) {
           for (let k = 0; k < numCols; k++) {
             let neighbors = 0;
             operations.forEach(([x, y]) => {
               const newI = i + x;
               const newK = k + y;
+              //assigns new values to the surrounding cells based on the state of the cells around them at the time of iteration
               if (newI >= 0 && newI < numRows && newK >= 0 && newK < numCols) {
                 neighbors += g[newI][newK];
               }
             });
-
+            //if over population or under population exists cells die
             if (neighbors < 2 || neighbors > 3) {
               gridCopy[i][k] = 0;
+              //if 3 surrounding cells are alive - new cells are born
             } else if (g[i][k] === 0 && neighbors === 3) {
               gridCopy[i][k] = 1;
             }
@@ -50,16 +65,15 @@ function GameOfLife() {
         }
       });
     });
-
+    //setting for time between each generation
     setTimeout(runSimulation, time);
   }, [time]);
 
+  //generation count updates with each iteration - resets to 0 if cleared or restarted with a new pattern
   useEffect(() => {
     generation == 0 && running == false
       ? setGeneration(0)
       : setGeneration(generation + 1);
-    // setGeneration(generation + 1);
-    // setTimeout(runSimulation, time);
   }, [grid]);
 
   return (
