@@ -242,10 +242,11 @@ function GameOfLife() {
                 });
                 setGrid(newGrid);
               }}
+              // #FF66FF #6633CC 00FF00
               style={{
                 width: 20,
                 height: 20,
-                backgroundColor: grid[i][k] ? "#FF66FF" : undefined,
+                backgroundColor: grid[i][k] ? "#00cc00" : undefined,
                 border: "solid 1px 	#330099",
               }}
             />
