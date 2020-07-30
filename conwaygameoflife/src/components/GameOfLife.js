@@ -66,6 +66,7 @@ function GameOfLife() {
     <>
       <h1>Conways Game of Life</h1>
       <div className="rules">
+        <h3>Rules:</h3>
         <ol>
           <li>Any live cell with two or three live neighbours survives.</li>
           <li>Any dead cell with three live neighbours becomes a live cell.</li>
@@ -229,8 +230,8 @@ function GameOfLife() {
               style={{
                 width: 20,
                 height: 20,
-                backgroundColor: grid[i][k] ? "green" : undefined,
-                border: "solid 1px gray",
+                backgroundColor: grid[i][k] ? "#FF66FF" : undefined,
+                border: "solid 1px 	#330099",
               }}
             />
           ))
