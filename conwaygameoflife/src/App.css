@@ -5,11 +5,11 @@
   /* border: 1px solid black; */
   color: white;
   /* opacity: 1; */
+  margin-bottom: 10%;
 }
 body {
   /* border: 1px solid red; */
   background-image: url("/cellular.jpg");
-  background-image: ;
 }
 
 button {
@@ -24,6 +24,7 @@ button {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+  opacity: 0.9;
 }
 
 /* .rules {
