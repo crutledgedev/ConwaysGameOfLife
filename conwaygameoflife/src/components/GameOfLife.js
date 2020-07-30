@@ -50,6 +50,7 @@ function GameOfLife() {
               const newI = i + x;
               const newK = k + y;
               //assigns new values to the surrounding cells based on the state of the cells around them at the time of iteration
+              //Only cases which evaluate to greater than or equal to 0 are considered, so all edge of grid cases are the same null/dead infertile ground
               if (newI >= 0 && newI < numRows && newK >= 0 && newK < numCols) {
                 neighbors += g[newI][newK];
               }
