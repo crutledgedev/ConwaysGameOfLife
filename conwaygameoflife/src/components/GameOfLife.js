@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { operations, numRows, numCols } from "./Initialize";
 import produce from "immer";
-import "./GameOfLife.css";
+// import "./GameOfLife.css";
 
 ///intial grid generation for out application this renders an emptyh grid where all values are 0
 //inital values are imported from Initialize.js to remove clutter from this component
