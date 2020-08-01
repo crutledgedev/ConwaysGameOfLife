@@ -27,3 +27,7 @@ We say a computing system is Turing Complete if it is capable of performing arbi
 Using a construct in The Game of Life called a glider gun, it's possible to build a rudimentary NAND gate in the Game of Life. While a NAND gate by itself isn't enough to be Turing Complete, the "infinite" grid of The Game of Life allows you to use them (or any other functionally complete operator) to build any other type of logical "circuitry" and memory, as well.
 
 Anything computable can be computed in The Game of Life given a large enough grid and enough time. Most people, however, find JavaScript to be a far easier development medium.
+
+### immer
+
+produce is the default function we get from Immer. Here, we pass it as a value to the setState() method. The produce function takes a function which accepts draft as an argument. It is inside this function that we can then set the draft copy with which we want to update our state.

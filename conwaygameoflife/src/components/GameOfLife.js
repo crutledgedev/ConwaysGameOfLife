@@ -38,7 +38,7 @@ function GameOfLife() {
       return;
     }
 
-    //gridCopy fullfilles the double buffering requirement - allowing the next generation to be calculated without disturbing the
+    //produce and gridCopy fullfilles the double buffering requirement - allowing the next generation to be calculated without disturbing the
     // the state currently being rendered to the screen.
     setGrid((g) => {
       return produce(g, (gridCopy) => {
